@@ -1,0 +1,1 @@
+## App that helps you organize your events by allowing your guests to choose the times they can attend.
