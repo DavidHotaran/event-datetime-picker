@@ -33,7 +33,7 @@ const createEvent = async (req, res) => {
     };
 };
 
-// put /api/event/:id
+// PUT /api/event/:id
 const updateEvent = async (req, res) => {
     try {
         await Event.findByIdAndUpdate(req.params.id, req.body);
