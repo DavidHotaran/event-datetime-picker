@@ -7,6 +7,11 @@ const schema = new mongoose.Schema({
     participants: [String],
     dateTime: String,
     responses: [Response],
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "User",
+    },
 },
     { timestamps: true }
 );

@@ -26,6 +26,7 @@ const createEvent = async (req, res) => {
             author: event.author,
             participants: event.participants,
             dateTime: event.dateTime,
+            createdBy: req.user.id,
         });
         res.json({ "message": "successfully saved event to DB" });
     } catch (e) {
@@ -36,21 +37,46 @@ const createEvent = async (req, res) => {
 // PUT /api/event/:id
 const updateEvent = async (req, res) => {
     try {
-        await Event.findByIdAndUpdate(req.params.id, req.body);
-        res.json({ "message": "successfully updated event" });
+        const user = await User.findById(req.user.id);
+        const event = await Event.findById(req.params.id);
+
+        if (!user) {
+            return res.json({ "error": "User not found" });
+        };
+
+        if (user._id.toString() !== event.createdBy.toString()) {
+            return res.json({ "error": "User not authorized" });
+        } else {
+            await Event.findByIdAndUpdate(req.params.id, req.body);
+            return res.json({ "message": "successfully updated event" });
+        }
+
     } catch (e) {
-        res.status(401).json({ "error": e.toString() })
-    }
+        res.status(401).json({ "error": e.toString() });
+    };
 };
 
 // DELETE /api/event/:id
 const deleteEvent = async (req, res) => {
     try {
-        await Event.findByIdAndDelete(req.params.id);
-        res.json({ "message": "successfully deleted event from DB" });
+        const user = await User.findById(req.user.id);
+        const event = await Event.findById(req.params.id);
+
+        if (!user) {
+            return res.json({ "error": "User not found" });
+        };
+
+        if (user._id.toString() !== event.createdBy.toString()) {
+            return res.json({ "error": "User not authorized" });
+        } else {
+            await Event.findByIdAndDelete(req.params.id);
+            return res.json({ "message": "successfully deleted event" });
+        }
+
     } catch (e) {
         res.status(401).json({ "error": e.toString() });
     };
+
 };
 
 module.exports = {
