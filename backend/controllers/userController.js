@@ -48,7 +48,7 @@ const createUser = async (req, res) => {
 
         if (user) {
             const token = generateToken(user._id);
-            return res.status(201).json({ "message": "successfully created user", "token": token });
+            return res.status(201).json({ "error": "", "message": "successfully created user", "token": token, "userName": userName });
         };
 
     } catch (error) {
@@ -67,7 +67,7 @@ const loginUser = async (req, res) => {
         const passwordMatch = await bcrypt.compare(password, user.password);
         if (user && passwordMatch) {
             const token = generateToken(user._id);
-            return res.json({ "message": "successfully logged in user", "token": token });
+            return res.json({ "error": "", "message": "successfully logged in user", "token": token, userName: user.userName });
         } else {
             return res.json({ "error": "invalid credentials" });
         };
