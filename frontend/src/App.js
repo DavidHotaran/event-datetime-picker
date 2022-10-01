@@ -1,12 +1,35 @@
 import './App.css';
+import PageWrapper from './pages/pageWrapper';
+import Login from './pages/login';
+import SignUp from './pages/signup';
+import IndexPage from './pages/index';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-700 text-white">
-      <div className='border-4 w-48 h-48 flex justify-center items-center'>
-        <p>test</p>
-      </div>
-    </div>
+    <Routes>
+      <Route
+        path='/'
+        element={<PageWrapper />}
+      >
+        <Route
+          index
+          element={<IndexPage/>}
+        >
+
+        </Route>
+        <Route
+          path='login'
+          element={<Login />}
+        >
+        </Route>
+        <Route
+          path='signup'
+          element={<SignUp />}
+        >
+        </Route>
+      </Route>
+    </Routes>
   );
 }
 
