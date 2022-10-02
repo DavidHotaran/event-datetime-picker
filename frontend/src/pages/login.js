@@ -34,7 +34,7 @@ export default function Login(){
 
             localStorage.setItem("token", JSON.stringify(tokenOrError.token));
             localStorage.setItem("userName", JSON.stringify(tokenOrError.userName));
-            navigate('/', {replace: true})
+            navigate('/account/overview', {replace: true})
 
         } catch (e) {
             console.log(e);
