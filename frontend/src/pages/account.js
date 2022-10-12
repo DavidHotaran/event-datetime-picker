@@ -24,8 +24,8 @@ export default function Account() {
                         />
                     </div>
                 </div>
-                <div className="flex flex-col ml-40 bg-gray-700 h-[90vh] overflow-y-auto w-full items-center">
-                    <div className="border-2 rounded w-11/12 my-3 px-3 py-3">
+                <div className="flex flex-col ml-40 bg-gray-700 h-[90vh] w-full items-center">
+                    <div className="border-2 rounded w-11/12 my-3 px-3 py-3 h-full overflow-y-auto">
                         <Outlet />
                     </div>
                 </div>
