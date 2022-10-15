@@ -2,7 +2,8 @@ const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// GET /api/user/:id
+// GET /api/user
+// get ID of user from middleware
 const getUser = async (req, res) => {
 
     if (!req.user) {
@@ -96,7 +97,8 @@ const updateUser = async (req, res) => {
     };
 };
 
-// DELETE /api/user/:id
+// DELETE /api/user
+// get ID of user from middleware
 const deleteUser = async (req, res) => {
     const { email, password } = req.body;
 
@@ -105,7 +107,7 @@ const deleteUser = async (req, res) => {
         const passwordMatch = await bcrypt.compare(password, user.password);
         if (user && passwordMatch) {
             await User.findOneAndDelete({ email });
-            return res.json({ "message": "successfully deleted user" });
+            return res.json({ "error": "", "message": "successfully deleted user" });
         } else {
             return res.json({ "error": "invalid credentials" });
         };

@@ -8,10 +8,10 @@ router.use('*', (req, res, next) => {
     next();
 });
 
-router.get('/:id', protectedRoute, getUser);
+router.get('/', protectedRoute, getUser);
 router.post('/', createUser);
 router.post('/login', loginUser);
 router.put('/:id', protectedRoute, updateUser);
-router.delete('/:id', protectedRoute, deleteUser);
+router.delete('/', protectedRoute, deleteUser);
 
 module.exports = router;
