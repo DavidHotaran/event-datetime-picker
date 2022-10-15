@@ -52,8 +52,8 @@ export default function AllUserEvents() {
 
     return (
         <div className="flex flex-col w-80 mx-auto">
-            <div className='mt-12'>
-                <h2 className="text-center font-bold text-2xl">Events Created</h2>
+            <div>
+                <h1 className="text-center text-4xl font-semibold underline underline-offset-4 mb-6">Events Created</h1>
                 {events && events.map(event => {
                     return (
                         <div className='flex items-center justify-center'>
