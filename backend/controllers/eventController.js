@@ -2,6 +2,17 @@ const Event = require('../models/eventModel');
 const Response = require('../models/responseModel');
 const User = require('../models/userModel');
 
+// GET /api/events/
+// get all events for a given user
+const getAllEventsForUser = async (req, res) => {
+    try {
+        const events = await Event.find({ createdBy: req.user._id });
+        return res.status(200).json({ "events": events });
+    } catch (e) {
+        res.status(401).json({ "error": e.toString() });
+    };
+};
+
 // GET /api/event/:id
 const getEvent = async (req, res) => {
     try {
@@ -80,6 +91,7 @@ const deleteEvent = async (req, res) => {
 };
 
 module.exports = {
+    getAllEventsForUser,
     getEvent,
     createEvent,
     updateEvent,
